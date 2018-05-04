@@ -63,33 +63,35 @@ namespace HairSalon.Models
       }
       return allStylists;
     }
-    // public static Stylist Find(int id)
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM stylists WHERE id = @id;";
-    //
-    //   MySqlParameter searchId = new MySqlParameter("@id", id);
-    //   cmd.Parameters.Add(searchId);
-    //
-    //   var rdr = cmd.ExecuteReader() as MySqlParameter;
-    //   int stylistId = 0;
-    //   string stylistName = "";
-    //
-    //   while(rdr.Read())
-    //   {
-    //     stylistId = rdr.GetInt32(0);
-    //     stylistName = rdr.GetString(1);
-    //   }
-    //   Stylist newStylist = new Stylist(stylistName, stylistId);
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //       conn.Dispose();
-    //   }
-    //   return newStylist;
-    // }
+    public static Stylist Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM stylists WHERE id = (@searchId);";
+
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = id;
+      cmd.Parameters.Add(searchId);
+
+      var rdr = cmd.ExecuteReader() as MySqlParameter;
+      int stylistId = 0;
+      string stylistName = "";
+
+      while(rdr.Read())
+      {
+        stylistId = rdr.GetInt32(0);
+        stylistName = rdr.GetString(1);
+      }
+      Stylist newStylist = new Stylist(stylistName, stylistId);
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return newStylist;
+    }
     public static void DeleteAll()
     {
         MySqlConnection conn = DB.Connection();

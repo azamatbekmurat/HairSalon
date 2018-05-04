@@ -2,17 +2,16 @@
   Layout = "_Layout";
 }
 
-
 <div class = "container">
     <div class = "row">
       <div class="col-md-12">
-        <form id="newStylist" action="/new/stylist" method="post">
+        <form id="newStylist" action="/stylist/add" method="post">
            <label for='name'>Enter Stylist Name: </label>
            <input id='name' name='name' type='text'>
            <button type="submit" class="btn">Add Stylist</button>
          </form>
+         <br>
         <button type="button" class="btn"><a href="/">Home</a></button>
-        <button type="button" class="btn"><a href="/stylists">All Stylists</a></button>
       </div>
     </div>
   </div>

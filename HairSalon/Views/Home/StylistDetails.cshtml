@@ -8,11 +8,10 @@
         <h2>Information about Stylist</h2>
         @if (Model != null)
         {
-          <h4>Name:@Model.GetName()</h4>
+          <h4>Name: @Model.GetName()</h4>
         }
 
-      <button type="button" class="btn"><a href="/Client/@Model.GetId()">Add a Client</a></button>
+      <button type="button" class="btn"><a href="/Client">Add a Client</a></button>
       <button type="button" class="btn"><a href="/">Home</a></button>
-      <button type="button" class="btn"><a href="/stylists">All Stylists</a></button>
       </div>
     </div>
