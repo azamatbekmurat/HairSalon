@@ -57,7 +57,7 @@ namespace HairSalon.Tests
         // [TestMethod]
         // public void Find_FindStylistInDatabase_Stylist()
         // {
-        //     Stylist testStylist = new Stylist("John");
+        //     Stylist testStylist = new Stylist("David");
         //     testStylist.Save();
         //
         //     Stylist foundStylist = Stylist.Find(testStylist.GetId());
