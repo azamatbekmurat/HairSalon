@@ -5,7 +5,7 @@
 #### By _**Azamat Bekmuratov**_
 
 ## Description
-This web application is built with C# Asp Net Core MVC framework. .
+This web application is built with C# Asp Net Core MVC framework. The user should be able to add a list of the stylists, and for each stylist, add clients who see that stylist.
 
 ## Setup/Installation Requirements
 
