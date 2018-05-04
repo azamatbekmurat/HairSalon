@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Information about Stylist</h2>
+        @if (Model != null)
+        {
+          <h4>Name:@Model.GetName()</h4>
+        }
+
+      <button type="button" class="btn"><a href="/Client/@Model.GetId()">Add a Client</a></button>
+      <button type="button" class="btn"><a href="/">Home</a></button>
+      <button type="button" class="btn"><a href="/stylists">All Stylists</a></button>
+      </div>
+    </div>
