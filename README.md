@@ -16,6 +16,11 @@ This web application is built with C# Asp Net Core MVC framework. The user shoul
 * Run the command >dotnet build
 * Run the command >dotnet run
 * Open http://localhost:5000 link in your browser.
+* Open MySql and run following commands:
+  * CREATE DATABASE azamat_bekmuratov;
+  * USE azamat_bekmuratov;
+  * CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
+  * CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT);
 
 ## Known Bugs
 
@@ -30,8 +35,7 @@ Please feel free to contact at azaege@gmail.com with any suggestions or feedback
 * Razor
 * HTML
 * MAMP
-* SQL
-* MyPhpAdmin
+* MySQL
 
 ### License
 
