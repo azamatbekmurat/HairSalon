@@ -5,14 +5,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <form id="newClient" action = "/new/client" method="post">
-         <label for='name'>Enter Client Name: </label>
-         <input id='name' name='name' type='text'>
-         <input type="hidden" name="stylistId" value="@Model.GetId()">
+      <form id="newClient" action = "/client/add/@Model" method="post">
+         <label for="name">Enter Client Name: </label>
+         <input id="name" name="name" type="text">
          <button type="submit" class="btn">Add Client</button>
        </form>
+      <br>
+      <a href="/Stylist/@Model"><button type="button" class="btn">Go Back to previous stylist page</button></a>
       <button type="button" class="btn"><a href="/">Home</a></button>
-      <button type="button" class="btn"><a href="/stylists">All Stylists</a></button>
     </div>
   </div>
 </div>

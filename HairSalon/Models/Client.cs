@@ -23,6 +23,10 @@ namespace HairSalon.Models
     {
       return _id;
     }
+    public void SetId(int id)
+    {
+        _id = id;
+    }
     public int GetStylistId()
     {
       return _stylistId;
@@ -54,7 +58,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients;";
+      cmd.CommandText = @"SELECT * FROM clients ORDER BY name ASC;";
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -71,35 +75,35 @@ namespace HairSalon.Models
       }
       return allClients;
     }
-    // public static Client Find(int id)
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM clients WHERE id = @id;";
-    //
-    //   MySqlParameter searchId = new MySqlParameter("@id", id);
-    //   cmd.Parameters.Add(searchId);
-    //
-    //   var rdr = cmd.ExecuteReader() as MySqlParameter;
-    //   int clientId = 0;
-    //   string clientName = "";
-    //   int stylistId = 0;
-    //
-    //   while(rdr.Read())
-    //   {
-    //     clientId = rdr.GetInt32(0);
-    //     clientName = rdr.GetString(1);
-    //     stylistId = rdr.GetInt32(2);
-    //   }
-    //   Client newClient = new Client(clientName, stylistId, clientId);
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //       conn.Dispose();
-    //   }
-    //   return newClient;
-    // }
+    public static Client Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients WHERE id = @id;";
+
+      MySqlParameter searchId = new MySqlParameter("@id", id);
+      cmd.Parameters.Add(searchId);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int clientId = 0;
+      string clientName = "";
+      int stylistId = 0;
+
+      while(rdr.Read())
+      {
+        clientId = rdr.GetInt32(0);
+        clientName = rdr.GetString(1);
+        stylistId = rdr.GetInt32(2);
+      }
+      Client newClient = new Client(clientName, stylistId, clientId);
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return newClient;
+    }
     public static void DeleteAll()
     {
         MySqlConnection conn = DB.Connection();

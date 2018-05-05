@@ -36,5 +36,28 @@ namespace HairSalon.Controllers
             return View(Stylist.Find(id));
         }
 
+        [HttpGet("/client/new/{id}")]
+        public ActionResult ClientForm(int id)
+        {
+          return View("Client", id);
+        }
+
+        [HttpPost("/client/add/{id}")]
+        public ActionResult AddClient(int id)
+        {
+          string name = Request.Form["name"];
+          Client newClient = new Client(name, id);
+          newClient.Save();
+          return RedirectToAction("StylistDetails", id);
+        }
+
+        [HttpGet("/stylist/clear")]
+        public ActionResult DeleteAll()
+        {
+          Stylist.DeleteAll();
+          Client.DeleteAll();
+          return RedirectToAction("Index");
+        }
+
     }
 }

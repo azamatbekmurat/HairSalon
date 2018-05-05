@@ -6,12 +6,24 @@
     <div class="row">
       <div class="col-md-12">
         <h2>Information about Stylist</h2>
+        <br>
         @if (Model != null)
         {
-          <h4>Name: @Model.GetName()</h4>
+          <h4>Stylist Name: @Model.GetName()</h4>
+          <br>
+          <h5>List of clients</h5>
+          <ul>
+            @foreach (var client in Model.GetClients())
+            {
+              <li>@client.GetName()</li>
+            }
+          </ul>
+          <br>
+
         }
 
-      <button type="button" class="btn"><a href="/Client">Add a Client</a></button>
+
+      <button type="button" class="btn"><a href="/client/new/@Model.GetId()">Add a Client</a></button>
       <button type="button" class="btn"><a href="/">Home</a></button>
       </div>
     </div>

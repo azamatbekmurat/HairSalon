@@ -8,6 +8,7 @@ namespace HairSalon.Models
   {
     private int _id;
     private string _name;
+    private List<Client> _clients = new List<Client> ();
 
     public Stylist(string Name, int id = 0)
     {
@@ -22,6 +23,10 @@ namespace HairSalon.Models
     public int GetId()
     {
       return _id;
+    }
+    public void SetId(int id)
+    {
+      _id = id;
     }
     public void Save()
     {
@@ -47,7 +52,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists;";
+      cmd.CommandText = @"SELECT * FROM stylists ORDER BY name ASC;";
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
@@ -75,7 +80,7 @@ namespace HairSalon.Models
       searchId.Value = id;
       cmd.Parameters.Add(searchId);
 
-      var rdr = cmd.ExecuteReader() as MySqlParameter;
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int stylistId = 0;
       string stylistName = "";
 
@@ -91,6 +96,34 @@ namespace HairSalon.Models
           conn.Dispose();
       }
       return newStylist;
+    }
+    public List<Client> GetClients()
+    {
+      List<Client> allClients = new List<Client>();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients where stylist_id = @stylistId ORDER BY name ASC;";
+
+      MySqlParameter stylistId = new MySqlParameter();
+      stylistId.ParameterName = "@stylistId";
+      stylistId.Value = _id;
+      cmd.Parameters.Add(stylistId);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      while (rdr.Read())
+      {
+          Client newClient = new Client(rdr.GetString(1), _id);
+          newClient.SetId(rdr.GetInt32(0));
+          allClients.Add(newClient);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return allClients;
     }
     public static void DeleteAll()
     {
